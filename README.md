@@ -1,5 +1,6 @@
-# generator-wpsite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> 
+# generator-wpsite 
+
+Generator is in beta  
 
 This generator creates complete environment for custom WordPress website/theme development.
 It includes:
@@ -23,7 +24,8 @@ It includes:
 * Install WP Plugins:
   * Piklist
 
-## Dependancies
+## Dependencies
+
  * LAMP Environment (for now only Windows is supported)
  * Node JS
  * In order to use this generator you must have MySQL & PHP binaries in your PATH.
@@ -47,12 +49,11 @@ yo wpsite
 On proccess complete you need to add VirtualHost in your Apache configuration (domain in /etc/hosts also), if you are using Laragon then this process should be done automatically. Your website should be available on previously entered URL.
 
 
-### Laravel Mix - SCSS, ES6, Live Reload
+### SCSS, ES6, Live Reload (Laravel Mix)
  
 To use SCSS, ES6, BrowserSync just use `npm run watch` inside theme folder  
 
 *\* Note: Browsersync only works if WPSITE_DEV mode enabled*
-
 
 
 ### Working on frontend (HTML, CSS/SCSS, JS only)

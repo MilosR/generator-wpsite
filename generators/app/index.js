@@ -22,7 +22,6 @@ const config = {
 module.exports = class extends Generator {
 
 
-
     /**
      * Constructor
      * @param args
@@ -129,7 +128,6 @@ module.exports = class extends Generator {
      */
     banner() {
 
-
         this.log(
             yosay(`Welcome to the ${chalk.blue("generator-wpsite")} generator!`)
         );
@@ -139,6 +137,7 @@ module.exports = class extends Generator {
 
     /**
      * Chk dir
+     * @returns {Promise}
      */
     checkDirectory() {
 
@@ -159,7 +158,8 @@ module.exports = class extends Generator {
     }
 
     /**
-     * Check if WP CLI is installed
+     * Check if PHP is in path
+     * @returns {Promise}
      */
     checkPHP() {
 
@@ -181,7 +181,8 @@ module.exports = class extends Generator {
     }
 
     /**
-     * Check if WP CLI is installed
+     * Check if MySQL is in path
+     * @returns {Promise}
      */
     checkMySQL() {
 
@@ -282,6 +283,7 @@ module.exports = class extends Generator {
 
     /**
      * Create DB
+     * @returns {Promise}
      */
     createDatabase() {
 
@@ -373,7 +375,6 @@ module.exports = class extends Generator {
 
     }
 
-
     /**
      * Extract WP
      * @returns {Promise}
@@ -388,7 +389,6 @@ module.exports = class extends Generator {
         })
 
     }
-
 
     /**
      * Remove unused files
@@ -406,7 +406,8 @@ module.exports = class extends Generator {
     }
 
     /**
-     * Create Theme
+     * Create Theme and copy template files
+     * @returns {Promise}
      */
     createTheme() {
 
@@ -415,7 +416,12 @@ module.exports = class extends Generator {
             this.log("Copying template files...")
 
             fs.mkdirSync('./wp-content/themes/' + this.projectSlug);
-            this.fs.copy(".htaccess", ".htaccess");
+            fs.copySync(this.templatePath(".htaccess"), ".htaccess", {
+                globOptions: {
+                    dot: true
+                }
+            });
+
             this.fs.copyTpl(
                 this.templatePath('theme/**/*'),
                 this.destinationPath('./wp-content/themes/' + this.projectSlug), {
@@ -435,7 +441,10 @@ module.exports = class extends Generator {
 
     }
 
-
+    /**
+     * Install WP using WP-CLI
+     * @returns {Promise}
+     */
     installWP() {
 
         return new Promise((resolve, reject) => {
@@ -530,7 +539,10 @@ module.exports = class extends Generator {
 
     }
 
-
+    /**
+     * Activates theme
+     * @returns {Promise}
+     */
     activateTheme() {
 
         return new Promise((resolve, reject) => {
@@ -558,7 +570,7 @@ module.exports = class extends Generator {
     }
 
     /**
-     * Activate theme
+     * Install plugins
      * @returns {Promise}
      */
     installPlugins() {
@@ -603,7 +615,8 @@ module.exports = class extends Generator {
     }
 
     /**
-     * NPM Install in theme folder
+     * Do "npm install" inside theme
+     * @returns {Promise}
      */
     npmInstallTheme() {
 
@@ -643,6 +656,5 @@ module.exports = class extends Generator {
         this.log("\n\n")
 
     }
-
 
 };
