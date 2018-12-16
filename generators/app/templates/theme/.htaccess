@@ -1,0 +1,16 @@
+<Files "package.json">
+	Deny from all
+	Require all denied
+</Files>
+<Files "package-lock.json">
+	Deny from all
+	Require all denied
+</Files>
+<Files "webpack.mix.js">
+	Deny from all
+	Require all denied
+</Files>
+<Files ".gitignore">
+	Deny from all
+	Require all denied
+</Files>

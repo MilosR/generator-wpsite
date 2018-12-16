@@ -1,0 +1,39 @@
+/*!
+Theme Name: <%= themeName %>
+Version: 1.0
+Author: Generated using WPSITE generator
+Text Domain: <%= themeSlug %>
+*/
+
+// Variables
+@import 'variables';
+
+//Vendor
+@import '../../node_modules/bootstrap/scss/bootstrap-grid';
+@import '../../node_modules/bootstrap/scss/mixins';
+@import '../../node_modules/bootstrap/scss/bootstrap-reboot';
+@import '../../node_modules/bootstrap/scss/utilities';
+
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/solid';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/regular';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/brands';
+
+@import '../../node_modules/owl.carousel/src/scss/owl.carousel';
+
+// Mixins
+@import 'mixins';
+
+// Partials
+@import 'reset';
+@import 'main';
+@import 'helpers';
+@import 'header';
+@import 'footer';
+@import 'elements';
+@import 'post-content';
+
+// Post Content
+.post-content{
+  @extend %post-content;
+}

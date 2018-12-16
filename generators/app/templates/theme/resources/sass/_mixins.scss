@@ -1,0 +1,13 @@
+/*
+---------------------
+Color palette functions and mixins
+---------------------
+*/
+@function color($color-index, $color-name: $default-color-palette) {
+  @if map-has-key($colors, $color-name) {
+    @return nth(map-get($colors, $color-name), $color-index);
+  } @else {
+    @warn "Unknown color palette!";
+    @return null;
+  }
+}

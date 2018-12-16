@@ -1,0 +1,24 @@
+// Colors
+// ------------------
+$colors: (
+        // Example
+        // "violet": #923fd2 #352a59,
+);
+
+$default-color-palette: "violet";
+
+// Font Awesome
+// ------------------
+$fa-font-path: 'fonts/fa';
+
+// Bootstrap
+// ------------------
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+        xxl: 1440px,
+        xxxl: 1920px,
+)

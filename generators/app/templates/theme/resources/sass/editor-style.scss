@@ -1,0 +1,22 @@
+// Variables
+@import 'variables';
+
+//Vendor
+@import '../../node_modules/bootstrap/scss/bootstrap-grid';
+@import '../../node_modules/bootstrap/scss/mixins';
+@import '../../node_modules/bootstrap/scss/bootstrap-reboot';
+@import '../../node_modules/bootstrap/scss/utilities';
+
+// Mixins
+@import 'mixins';
+
+// Partials
+@import 'reset';
+@import 'post-content';
+
+
+body#tinymce{
+  padding: 50px !important;
+  margin: 0;
+  @extend %post-content
+}
