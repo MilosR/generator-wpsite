@@ -48,7 +48,8 @@ yo wpsite
 
 On proccess complete you need to add VirtualHost in your Apache configuration (domain in /etc/hosts also), if you are using Laragon then this process should be done automatically. Your website should be available on previously entered URL.
 
-##Usage
+## Usage 
+
 ### SCSS, ES6, Live Reload (Laravel Mix)
  
 To use SCSS, ES6, BrowserSync just use `npm run watch` inside theme folder  
