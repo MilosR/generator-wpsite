@@ -121,7 +121,7 @@ add_action('login_enqueue_scripts', function(){
             width: 170px;
             background-size: contain;
             background-position: center;
-            background-image: url("<?php echo get_stylesheet_directory_uri()."/images/logo-login.png" ?>");
+            background-image: url("<?php echo get_stylesheet_directory_uri()."/images/logo-login.jpg" ?>");
             padding-bottom: 30px;
         }
     </style>

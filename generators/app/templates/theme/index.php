@@ -3,12 +3,15 @@
 <?php /* Delete below and add yout content */ ?>
 
 <div id="window">
+
+	<div id="logo"></div>
+	
 	<h1>WPSITE Generated Theme</h1>
 	<p>Your Theme is successfully generated. Username & password for WP login are: "admin"</p>
 	<br>
 	<h2>Getting started</h2>
 	<p>
-		To get started you can edit /wp-content/themes/<%= themeName %>/index.php file where you can erase content for this page
+		To get started you can edit /wp-content/themes/<%= themeSlug %>/index.php file where you can erase content for this page
 	</p>
 	<h2>Laravel Mix</h2>
 	<p>
@@ -44,6 +47,16 @@
 		justify-content: center;
 		flex-direction: column;
 		background: #6f87d6;
+	}
+
+	#logo{
+		width: 150px;
+		height: 60px;
+		background-image: url("<?php echo get_template_directory_uri(); ?>/images/logo-login.png");
+		background-size: contain;
+		background-repeat: no-repeat;
+		margin: 0 auto;
+		margin-bottom: 20px;
 	}
 
 	#window{
