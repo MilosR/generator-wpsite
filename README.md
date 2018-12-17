@@ -1,4 +1,8 @@
-# generator-wpsite 
+<p align="center">
+  <img src="logo.png" width="240" title="hover text">
+</p>
+
+---
 
 Generator is in beta  
 
