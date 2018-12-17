@@ -1,12 +1,12 @@
 {
   "name": "generator-wpsite",
   "version": "0.0.0",
-  "description": "",
+  "description": "Creates Environment for WordPress Theme Development, Laravel Mix, SCSS, ES6, Live Reload",
   "homepage": "",
   "author": {
-    "name": "Milos",
+    "name": "MilosR",
     "email": "",
-    "url": ""
+    "url": "https://github.com/MilosR"
   },
   "files": [
     "generators"
@@ -14,7 +14,7 @@
   "main": "generators/index.js",
   "keywords": [
     "",
-    "yeoman-generator"
+    "yeoman-generator",
   ],
   "devDependencies": {
     "yeoman-test": "^1.7.0",
