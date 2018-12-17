@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.png" width="240" title="hover text">
+  <img src="https://github.com/MilosR/generator-wpsite/raw/master/logo.png" width="240" title="hover text">
 </p>
 
 ---
