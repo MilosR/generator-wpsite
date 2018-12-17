@@ -1,6 +1,6 @@
 {
   "name": "generator-wpsite",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Creates Environment for WordPress Theme Development, Laravel Mix, SCSS, ES6, Live Reload",
   "homepage": "",
   "author": {
