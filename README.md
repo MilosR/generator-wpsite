@@ -30,7 +30,7 @@ It includes:
 
 ## Dependencies
 
- * LAMP Environment (for now only Windows is supported)
+ * WAMP Environment (for now only Windows is supported)
  * Node JS
  * In order to use this generator you must have MySQL & PHP binaries in your PATH.
 
