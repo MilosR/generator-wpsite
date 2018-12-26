@@ -8,20 +8,7 @@ const fs = require('fs-extra')
 const {exec} = require('child_process');
 const path = require('path');
 
-
 module.exports = class extends Generator {
-
-
-    /**
-     * Constructor
-     * @param args
-     * @param opts
-     */
-    constructor(args, opts) {
-
-        super(args, opts)
-
-    }
 
     /**
      * Banner
@@ -35,6 +22,7 @@ module.exports = class extends Generator {
     }
 
 
+
     /**
      * Chk dir
      * @returns {Promise}
@@ -44,8 +32,10 @@ module.exports = class extends Generator {
         return new Promise((resolve, reject) => {
 
             fs.readdir(process.cwd(), (err, files) => {
-                if (files.length || err) {
-                    this.env.error('Directory must be empty!')
+                if (files.filter((fileName) => {
+                        return fileName == ".wpsite"
+                    }).length == 0) {
+                    this.env.error('This project is not generated using wpsite generator')
                     reject();
                 }
                 else {
@@ -67,22 +57,16 @@ module.exports = class extends Generator {
     }
 
     /**
-     * Prompt
-     * @returns {Promise|*|Promise.<TResult>}
+     * Chk dir
+     * @returns {Promise}
      */
-    promptProjectName() {
+    readWpsiteFile() {
 
-        return this.prompt([{
-            type: "input",
-            name: "projectName",
-            message: "Enter project name (nice name)",
-            required: true,
-        }]).then(props => {
+        let wpsite = JSON.parse(fs.readFileSync(".wpsite"));
 
-            this.projectName = props.projectName;
-            this.projectSlug = slug(props.projectName);
-
-        });
+        this.projectSlug = wpsite.projectSlug
+        this.projectName = wpsite.projectName
+        this.themeName = wpsite.themeName
 
     }
 
@@ -96,17 +80,11 @@ module.exports = class extends Generator {
 
         return this.prompt([{
             type: "input",
-            name: "themeName",
-            message: "Enter theme name",
-            default: this.projectSlug,
-            required: true,
-        }, {
-            type: "input",
             name: "websiteUrl",
             message: "Enter website URL",
             default: "http://" + this.projectSlug + ".wpsite",
             required: true,
-        }, {
+        },{
             type: "input",
             name: "dbName",
             message: "Enter MySQL database name",
@@ -168,91 +146,6 @@ module.exports = class extends Generator {
     }
 
     /**
-     * Downloads WP (faster than WP Cli method)
-     * @returns {Promise}
-     */
-    downloadWP() {
-
-        return this._downloadFile({
-            name: "WordPress",
-            url: "https://wordpress.org/latest.zip",
-            filename: 'wp_temp.zip'
-        })
-
-    }
-
-    /**
-     * Extract WP
-     * @returns {Promise}
-     */
-    extractWP() {
-
-        return this._extractZip({
-            name: 'WordPress',
-            filename: 'wp_temp.zip',
-            zipDir: 'wordpress/',
-            outputDir: './'
-        })
-
-    }
-
-    /**
-     * Remove unused files
-     */
-    cleanWordPress() {
-
-        this.log("Cleaning WordPress installation")
-
-        fs.removeSync('./wp-content/plugins/akismet')
-        fs.removeSync('./wp-content/plugins/hello.php')
-        fs.removeSync('./wp-content/themes/')
-        fs.mkdirSync('./wp-content/themes/');
-        fs.writeFileSync('./wp-content/themes/index.php', "");
-
-    }
-
-    /**
-     * Create Theme and copy template files
-     * @returns {Promise}
-     */
-    createTheme() {
-
-        return new Promise( (resolve, reject) => {
-
-            this.log("Copying template files...")
-
-            fs.mkdirSync('./wp-content/themes/' + this.projectSlug);
-            fs.copySync(this.templatePath(".htaccess"), ".htaccess", {
-                globOptions: {
-                    dot: true
-                }
-            });
-            fs.copySync(this.templatePath(".gitignore"), ".gitignore", {
-                globOptions: {
-                    dot: true
-                }
-            });
-
-            this.fs.copyTpl(
-                this.templatePath('theme/**/*'),
-                this.destinationPath('./wp-content/themes/' + this.projectSlug), {
-                    themeName: this.projectName,
-                    themeSlug: this.projectSlug,
-                },
-                undefined, {
-                    globOptions: {
-                        dot: true
-                    }
-                }
-            )
-
-            this.fs.commit(resolve);
-
-        } )
-
-    }
-
-    /**
      * Install WP using WP-CLI
      * @returns {Promise}
      */
@@ -274,7 +167,7 @@ module.exports = class extends Generator {
      */
     activateTheme() {
 
-        return this._activateTheme( this.projectSlug )
+        return this._activateTheme(this.projectSlug)
 
     }
 
@@ -284,7 +177,7 @@ module.exports = class extends Generator {
      */
     installPlugins() {
 
-        return this._installPlugins( ["piklist"] )
+        return this._installPlugins(["piklist"])
 
     }
 
@@ -298,30 +191,6 @@ module.exports = class extends Generator {
 
     }
 
-    /**
-     * Clean
-     */
-    clean() {
-
-        fs.unlinkSync('wp_temp.zip');
-
-    }
-
-    /**
-     * Write Wpsite File
-     */
-    createWpsiteFile() {
-
-        let wpsite = {
-            projectSlug: this.projectSlug,
-            projectName: this.projectName,
-            themeName: this.props.themeName,
-        }
-
-        fs.writeFileSync(".wpsite", JSON.stringify(wpsite) );
-
-    }
-
 
     /**
      * Do "npm install" inside theme
@@ -332,7 +201,6 @@ module.exports = class extends Generator {
         return this._npmInstallTheme(this.projectSlug)
 
     }
-
 
     /**
      * Separator
