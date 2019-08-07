@@ -227,7 +227,7 @@ module.exports = class extends Generator {
                     dot: true
                 }
             });
-            fs.copySync(this.templatePath(".gitignore"), ".gitignore", {
+            fs.copySync(this.templatePath("gitignore.txt"), ".gitignore", {
                 globOptions: {
                     dot: true
                 }
